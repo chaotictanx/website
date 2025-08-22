@@ -1,0 +1,620 @@
+---
+export const prerender = true;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>ChaoticTanx - Explosive Artillery Warfare</title>
+		<meta name="description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<meta property="og:title" content="ChaoticTanx - Explosive Artillery Warfare" />
+		<meta property="og:description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="ChaoticTanx - Explosive Artillery Warfare" />
+		<meta name="twitter:description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<style>
+			:root {
+				--primary-orange: #ff6b35;
+				--primary-red: #c41e3a;
+				--dark-bg: #0a0a0a;
+				--dark-card: #1a1a1a;
+				--text-light: #ffffff;
+				--text-muted: #cccccc;
+				--text-accent: #ff8c42;
+				--border-glow: rgba(255, 107, 53, 0.3);
+				--gradient-primary: linear-gradient(135deg, #ff6b35 0%, #c41e3a 100%);
+				--gradient-card: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+			}
+			
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				font-family: 'Inter', sans-serif;
+				background: var(--dark-bg);
+				color: var(--text-light);
+				line-height: 1.6;
+				overflow-x: hidden;
+			}
+			
+			.orbitron {
+				font-family: 'Orbitron', monospace;
+			}
+			
+			/* Navigation */
+			nav {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				background: rgba(10, 10, 10, 0.95);
+				backdrop-filter: blur(10px);
+				border-bottom: 1px solid var(--border-glow);
+				z-index: 1000;
+				padding: 1rem 0;
+			}
+			
+			nav .container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			.logo {
+				font-size: 1.5rem;
+				font-weight: 900;
+				color: var(--primary-orange);
+				text-decoration: none;
+			}
+			
+			.nav-links {
+				display: flex;
+				list-style: none;
+				gap: 2rem;
+			}
+			
+			.nav-links a {
+				color: var(--text-light);
+				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.3s ease;
+			}
+			
+			.nav-links a:hover {
+				color: var(--text-accent);
+			}
+			
+			/* Hero Section */
+			.hero {
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				position: relative;
+				background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+			}
+			
+			.hero-content {
+				max-width: 800px;
+				padding: 2rem;
+				z-index: 2;
+			}
+			
+			.hero h1 {
+				font-size: clamp(3rem, 8vw, 6rem);
+				font-weight: 900;
+				margin-bottom: 1rem;
+				background: var(--gradient-primary);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				line-height: 1.1;
+			}
+			
+			.hero-subtitle {
+				font-size: clamp(1.2rem, 3vw, 1.5rem);
+				margin-bottom: 2rem;
+				color: var(--text-muted);
+				font-weight: 300;
+			}
+			
+			.hero-description {
+				font-size: 1.1rem;
+				margin-bottom: 3rem;
+				color: var(--text-muted);
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.cta-buttons {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-bottom: 3rem;
+			}
+			
+			.btn {
+				display: inline-block;
+				padding: 1rem 2rem;
+				border-radius: 8px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+				border: none;
+				cursor: pointer;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.btn-primary {
+				background: var(--gradient-primary);
+				color: white;
+				box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+			}
+			
+			.btn-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+			}
+			
+			.btn-secondary {
+				background: transparent;
+				color: var(--text-light);
+				border: 2px solid var(--primary-orange);
+			}
+			
+			.btn-secondary:hover {
+				background: var(--primary-orange);
+				color: white;
+				transform: translateY(-2px);
+			}
+			
+			/* Features Section */
+			.features {
+				padding: 6rem 0;
+				background: linear-gradient(to bottom, transparent, rgba(26, 26, 26, 0.5));
+			}
+			
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+			}
+			
+			.section-title {
+				font-size: clamp(2.5rem, 5vw, 3.5rem);
+				text-align: center;
+				margin-bottom: 3rem;
+				color: var(--text-light);
+				font-weight: 700;
+			}
+			
+			.features-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-bottom: 4rem;
+			}
+			
+			.feature-card {
+				background: var(--gradient-card);
+				border: 1px solid rgba(255, 107, 53, 0.2);
+				border-radius: 12px;
+				padding: 2rem;
+				text-align: center;
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.feature-card:hover {
+				transform: translateY(-5px);
+				border-color: var(--primary-orange);
+				box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+			}
+			
+			.feature-icon {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+				display: block;
+			}
+			
+			.feature-card h3 {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+				color: var(--text-accent);
+				font-weight: 600;
+			}
+			
+			.feature-card p {
+				color: var(--text-muted);
+				line-height: 1.6;
+			}
+			
+			/* Screenshots Section */
+			.screenshots {
+				padding: 6rem 0;
+				background: rgba(26, 26, 26, 0.3);
+			}
+			
+			.screenshots-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+				gap: 2rem;
+				margin-top: 3rem;
+			}
+			
+			.screenshot {
+				background: var(--dark-card);
+				border: 2px solid rgba(255, 107, 53, 0.3);
+				border-radius: 12px;
+				padding: 1.5rem;
+				text-align: center;
+				transition: all 0.3s ease;
+			}
+			
+			.screenshot:hover {
+				border-color: var(--primary-orange);
+				transform: scale(1.02);
+			}
+			
+			.screenshot-placeholder {
+				width: 100%;
+				height: 200px;
+				background: linear-gradient(135deg, #333 0%, #555 100%);
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 3rem;
+				color: var(--text-accent);
+				margin-bottom: 1rem;
+			}
+			
+			.screenshot h3 {
+				color: var(--text-accent);
+				margin-bottom: 0.5rem;
+			}
+			
+			.screenshot p {
+				color: var(--text-muted);
+				font-size: 0.9rem;
+			}
+			
+			/* Download Section */
+			.download {
+				padding: 6rem 0;
+				background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.1) 0%, transparent 70%);
+			}
+			
+			.download-content {
+				text-align: center;
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			
+			.download h2 {
+				font-size: clamp(2.5rem, 5vw, 3.5rem);
+				margin-bottom: 1rem;
+				color: var(--text-light);
+			}
+			
+			.download p {
+				font-size: 1.1rem;
+				margin-bottom: 2rem;
+				color: var(--text-muted);
+			}
+			
+			.platform-badges {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-top: 2rem;
+			}
+			
+			.platform-badge {
+				background: var(--dark-card);
+				border: 2px solid var(--primary-orange);
+				border-radius: 8px;
+				padding: 1rem 1.5rem;
+				color: var(--text-light);
+				text-decoration: none;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			
+			.platform-badge:hover {
+				background: var(--primary-orange);
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+			}
+			
+			/* Footer */
+			footer {
+				padding: 3rem 0;
+				background: var(--dark-card);
+				border-top: 1px solid rgba(255, 107, 53, 0.2);
+				text-align: center;
+			}
+			
+			footer p {
+				color: var(--text-muted);
+				margin-bottom: 1rem;
+			}
+			
+			.social-links {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				margin-bottom: 2rem;
+			}
+			
+			.social-links a {
+				color: var(--text-muted);
+				font-size: 1.5rem;
+				transition: color 0.3s ease;
+			}
+			
+			.social-links a:hover {
+				color: var(--text-accent);
+			}
+			
+			/* Responsive Design */
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none;
+				}
+				
+				.cta-buttons {
+					flex-direction: column;
+					align-items: center;
+				}
+				
+				.btn {
+					width: 200px;
+				}
+				
+				.features-grid {
+					grid-template-columns: 1fr;
+				}
+				
+				.screenshots-grid {
+					grid-template-columns: 1fr;
+				}
+				
+				.platform-badges {
+					flex-direction: column;
+					align-items: center;
+				}
+			}
+			
+			/* Animations */
+			@keyframes float {
+				0%, 100% { transform: translateY(0px); }
+				50% { transform: translateY(-10px); }
+			}
+			
+			.hero-content {
+				animation: float 6s ease-in-out infinite;
+			}
+			
+			/* Background Effects */
+			.hero::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: 
+					radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 20%, rgba(196, 30, 58, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 40% 40%, rgba(255, 140, 66, 0.05) 0%, transparent 50%);
+				z-index: 1;
+			}
+			
+			/* Scroll Animations */
+			@media (prefers-reduced-motion: no-preference) {
+				.feature-card {
+					opacity: 0;
+					transform: translateY(30px);
+					animation: fadeInUp 0.6s ease-out forwards;
+				}
+				
+				.feature-card:nth-child(1) { animation-delay: 0.1s; }
+				.feature-card:nth-child(2) { animation-delay: 0.2s; }
+				.feature-card:nth-child(3) { animation-delay: 0.3s; }
+				.feature-card:nth-child(4) { animation-delay: 0.4s; }
+				.feature-card:nth-child(5) { animation-delay: 0.5s; }
+				.feature-card:nth-child(6) { animation-delay: 0.6s; }
+			}
+			
+			@keyframes fadeInUp {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<nav>
+			<div class="container">
+				<a href="#" class="logo orbitron">CHAOTICTANX</a>
+				<ul class="nav-links">
+					<li><a href="#features">Features</a></li>
+					<li><a href="#screenshots">Screenshots</a></li>
+					<li><a href="#download">Download</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<main>
+			<section class="hero">
+				<div class="hero-content">
+					<h1 class="orbitron">CHAOTIC<br/>TANX</h1>
+					<p class="hero-subtitle">Explosive Artillery Warfare</p>
+					<p class="hero-description">
+						Master the art of tank warfare in this physics-based artillery game featuring destructible terrain, 
+						strategic gameplay, and explosive chaos. Aim carefully, fire strategically, and dominate the battlefield!
+					</p>
+					<div class="cta-buttons">
+						<a href="#download" class="btn btn-primary">Download Now</a>
+						<a href="#screenshots" class="btn btn-secondary">View Screenshots</a>
+					</div>
+					<p style="color: var(--text-muted); font-size: 0.9rem;">
+						🎮 Available on iOS • 🆓 Free to Play • 🏆 Strategic Combat
+					</p>
+				</div>
+			</section>
+
+			<section class="features" id="features">
+				<div class="container">
+					<h2 class="section-title orbitron">Game Features</h2>
+					<div class="features-grid">
+						<div class="feature-card">
+							<span class="feature-icon">🎯</span>
+							<h3>Physics-Based Artillery</h3>
+							<p>Master realistic ballistics with wind effects, trajectory calculations, and precise aiming mechanics that reward skill and strategy.</p>
+						</div>
+						<div class="feature-card">
+							<span class="feature-icon">💥</span>
+							<h3>Destructible Terrain</h3>
+							<p>Watch the battlefield evolve as explosions carve new landscapes, creating strategic opportunities and tactical challenges.</p>
+						</div>
+						<div class="feature-card">
+							<span class="feature-icon">⚔️</span>
+							<h3>Diverse Weapons Arsenal</h3>
+							<p>From standard shells to nuclear weapons, choose from a variety of explosive options each with unique characteristics and strategies.</p>
+						</div>
+						<div class="feature-card">
+							<span class="feature-icon">🤖</span>
+							<h3>Smart AI Opponents</h3>
+							<p>Challenge intelligent AI tanks that adapt their tactics, learn from your moves, and provide engaging single-player combat.</p>
+						</div>
+						<div class="feature-card">
+							<span class="feature-icon">🎮</span>
+							<h3>Intuitive Touch Controls</h3>
+							<p>Seamless touch interface designed for mobile gameplay with gesture-based aiming, camera controls, and weapon switching.</p>
+						</div>
+						<div class="feature-card">
+							<span class="feature-icon">🏆</span>
+							<h3>Progressive Gameplay</h3>
+							<p>Earn money through combat, unlock powerful weapons, and progress through increasingly challenging battles and scenarios.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="screenshots" id="screenshots">
+				<div class="container">
+					<h2 class="section-title orbitron">Screenshots</h2>
+					<div class="screenshots-grid">
+						<div class="screenshot">
+							<div class="screenshot-placeholder">🎯</div>
+							<h3>Strategic Aiming</h3>
+							<p>Precise trajectory preview and realistic physics simulation</p>
+						</div>
+						<div class="screenshot">
+							<div class="screenshot-placeholder">💥</div>
+							<h3>Explosive Combat</h3>
+							<p>Destructible terrain and spectacular explosion effects</p>
+						</div>
+						<div class="screenshot">
+							<div class="screenshot-placeholder">⚔️</div>
+							<h3>Weapon Selection</h3>
+							<p>Comprehensive arsenal with unique weapon characteristics</p>
+						</div>
+						<div class="screenshot">
+							<div class="screenshot-placeholder">🎮</div>
+							<h3>Intuitive Interface</h3>
+							<p>Clean, modern UI designed for optimal mobile gameplay</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="download" id="download">
+				<div class="container">
+					<div class="download-content">
+						<h2 class="orbitron">Ready for Battle?</h2>
+						<p>Download ChaoticTanx now and experience the ultimate artillery warfare game on your mobile device.</p>
+						<a href="#" class="btn btn-primary">Coming Soon to App Store</a>
+						<div class="platform-badges">
+							<a href="#" class="platform-badge">
+								<span>📱</span> iOS
+							</a>
+							<a href="#" class="platform-badge">
+								<span>🤖</span> Android (Coming Soon)
+							</a>
+							<a href="https://github.com/chaotictanx" class="platform-badge">
+								<span>💻</span> Source Code
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer id="contact">
+			<div class="container">
+				<div class="social-links">
+					<a href="https://github.com/chaotictanx" title="GitHub">💻</a>
+					<a href="mailto:contact@chaotictanx.com" title="Email">📧</a>
+					<a href="#" title="Twitter">🐦</a>
+				</div>
+				<p>&copy; 2025 ChaoticTanx. All rights reserved.</p>
+				<p style="font-size: 0.8rem; margin-top: 1rem;">
+					Built with ❤️ using Swift, SpriteKit, and modern game development practices
+				</p>
+			</div>
+		</footer>
+
+		<script>
+			// Smooth scrolling for navigation links
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) {
+						target.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start'
+						});
+					}
+				});
+			});
+
+			// Add scroll effect to navigation
+			window.addEventListener('scroll', () => {
+				const nav = document.querySelector('nav');
+				if (window.scrollY > 100) {
+					nav.style.background = 'rgba(10, 10, 10, 0.98)';
+				} else {
+					nav.style.background = 'rgba(10, 10, 10, 0.95)';
+				}
+			});
+		</script>
+	</body>
+</html>
