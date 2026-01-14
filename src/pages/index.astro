@@ -8,14 +8,14 @@ export const prerender = true;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>ChaoticTanx - Explosive Artillery Warfare</title>
-		<meta name="description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
-		<meta property="og:title" content="ChaoticTanx - Explosive Artillery Warfare" />
-		<meta property="og:description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<title>Chaotic Tanx - Explosive Artillery Warfare</title>
+		<meta name="description" content="Master the art of tank warfare in Chaotic Tanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<meta property="og:title" content="Chaotic Tanx - Explosive Artillery Warfare" />
+		<meta property="og:description" content="Master the art of tank warfare in Chaotic Tanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
 		<meta property="og:type" content="website" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="ChaoticTanx - Explosive Artillery Warfare" />
-		<meta name="twitter:description" content="Master the art of tank warfare in ChaoticTanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
+		<meta name="twitter:title" content="Chaotic Tanx - Explosive Artillery Warfare" />
+		<meta name="twitter:description" content="Master the art of tank warfare in Chaotic Tanx - a physics-based artillery game featuring destructible terrain, strategic gameplay, and chaotic battles!" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -447,6 +447,7 @@ export const prerender = true;
 				.feature-card:nth-child(4) { animation-delay: 0.4s; }
 				.feature-card:nth-child(5) { animation-delay: 0.5s; }
 				.feature-card:nth-child(6) { animation-delay: 0.6s; }
+				.feature-card:nth-child(7) { animation-delay: 0.7s; }
 			}
 			
 			@keyframes fadeInUp {
@@ -460,7 +461,7 @@ export const prerender = true;
 	<body>
 		<nav>
 			<div class="container">
-				<a href="#" class="logo orbitron">CHAOTICTANX</a>
+				<a href="#" class="logo orbitron">CHAOTIC TANX</a>
 				<ul class="nav-links">
 					<li><a href="#features">Features</a></li>
 					<li><a href="#screenshots">Screenshots</a></li>
@@ -480,11 +481,11 @@ export const prerender = true;
 						strategic gameplay, and explosive chaos. Aim carefully, fire strategically, and dominate the battlefield!
 					</p>
 					<div class="cta-buttons">
-						<a href="#download" class="btn btn-primary">Download Now</a>
-						<a href="#screenshots" class="btn btn-secondary">View Screenshots</a>
+						<a href="#download" class="btn btn-primary">Join the Beta</a>
+						<a href="#features" class="btn btn-secondary">See Features</a>
 					</div>
 					<p style="color: var(--text-muted); font-size: 0.9rem;">
-						🎮 Available on iOS • 🆓 Free to Play • 🏆 Strategic Combat
+						🎮 iOS • 🌐 Online Multiplayer • 🆓 Free to Play
 					</p>
 				</div>
 			</section>
@@ -514,6 +515,11 @@ export const prerender = true;
 							<p>Challenge intelligent AI tanks that adapt their tactics, learn from your moves, and provide engaging single-player combat.</p>
 						</div>
 						<div class="feature-card">
+							<span class="feature-icon">🌐</span>
+							<h3>Online Multiplayer</h3>
+							<p>Challenge friends and rivals worldwide with Game Center turn-based multiplayer. Take your shot, then pick up where you left off anytime.</p>
+						</div>
+						<div class="feature-card">
 							<span class="feature-icon">🎮</span>
 							<h3>Intuitive Touch Controls</h3>
 							<p>Seamless touch interface designed for mobile gameplay with gesture-based aiming, camera controls, and weapon switching.</p>
@@ -529,27 +535,31 @@ export const prerender = true;
 
 			<section class="screenshots" id="screenshots">
 				<div class="container">
-					<h2 class="section-title orbitron">Screenshots</h2>
+					<h2 class="section-title orbitron">In Action</h2>
+					<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+						Screenshots coming soon. Join the beta to see it for yourself!
+					</p>
+					<!-- TODO: Replace placeholders with actual game screenshots -->
 					<div class="screenshots-grid">
 						<div class="screenshot">
 							<div class="screenshot-placeholder">🎯</div>
-							<h3>Strategic Aiming</h3>
-							<p>Precise trajectory preview and realistic physics simulation</p>
+							<h3>Line Up Your Shot</h3>
+							<p>Drag to aim, factor in wind, watch the trajectory arc</p>
 						</div>
 						<div class="screenshot">
 							<div class="screenshot-placeholder">💥</div>
-							<h3>Explosive Combat</h3>
-							<p>Destructible terrain and spectacular explosion effects</p>
+							<h3>Terrain Destruction</h3>
+							<p>Every explosion reshapes the battlefield</p>
 						</div>
 						<div class="screenshot">
-							<div class="screenshot-placeholder">⚔️</div>
-							<h3>Weapon Selection</h3>
-							<p>Comprehensive arsenal with unique weapon characteristics</p>
+							<div class="screenshot-placeholder">🌐</div>
+							<h3>Play Anywhere</h3>
+							<p>Async multiplayer - take your turn whenever</p>
 						</div>
 						<div class="screenshot">
-							<div class="screenshot-placeholder">🎮</div>
-							<h3>Intuitive Interface</h3>
-							<p>Clean, modern UI designed for optimal mobile gameplay</p>
+							<div class="screenshot-placeholder">☢️</div>
+							<h3>Arsenal of Chaos</h3>
+							<p>From baby nukes to cluster bombs</p>
 						</div>
 					</div>
 				</div>
@@ -558,18 +568,15 @@ export const prerender = true;
 			<section class="download" id="download">
 				<div class="container">
 					<div class="download-content">
-						<h2 class="orbitron">Ready for Battle?</h2>
-						<p>Download ChaoticTanx now and experience the ultimate artillery warfare game on your mobile device.</p>
-						<a href="#" class="btn btn-primary">Coming Soon to App Store</a>
-						<div class="platform-badges">
-							<a href="#" class="platform-badge">
-								<span>📱</span> iOS
-							</a>
-							<a href="#" class="platform-badge">
-								<span>🤖</span> Android (Coming Soon)
-							</a>
+						<h2 class="orbitron">Join the Beta</h2>
+						<p>Be among the first to play Chaotic Tanx! We're looking for beta testers to help shape the game before public release.</p>
+						<a href="#" class="btn btn-primary">Join TestFlight Beta</a>
+						<p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+							Available for iOS devices. TestFlight link coming soon!
+						</p>
+						<div class="platform-badges" style="margin-top: 2rem;">
 							<a href="https://github.com/chaotictanx" class="platform-badge">
-								<span>💻</span> Source Code
+								<span>💻</span> View Source
 							</a>
 						</div>
 					</div>
@@ -584,7 +591,7 @@ export const prerender = true;
 					<a href="mailto:contact@chaotictanx.com" title="Email">📧</a>
 					<a href="#" title="Twitter">🐦</a>
 				</div>
-				<p>&copy; 2025 ChaoticTanx. All rights reserved.</p>
+				<p>&copy; 2026 Chaotic Tanx. All rights reserved.</p>
 				<p style="font-size: 0.8rem; margin-top: 1rem;">
 					Built with ❤️ using Swift, SpriteKit, and modern game development practices
 				</p>
