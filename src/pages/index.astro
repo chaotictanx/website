@@ -274,16 +274,10 @@ export const prerender = true;
 				transform: scale(1.02);
 			}
 			
-			.screenshot-placeholder {
+			.screenshot-img {
 				width: 100%;
-				height: 200px;
-				background: linear-gradient(135deg, #333 0%, #555 100%);
+				height: auto;
 				border-radius: 8px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 3rem;
-				color: var(--text-accent);
 				margin-bottom: 1rem;
 			}
 			
@@ -536,30 +530,26 @@ export const prerender = true;
 			<section class="screenshots" id="screenshots">
 				<div class="container">
 					<h2 class="section-title orbitron">In Action</h2>
-					<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-						Screenshots coming soon. Join the beta to see it for yourself!
-					</p>
-					<!-- TODO: Replace placeholders with actual game screenshots -->
 					<div class="screenshots-grid">
 						<div class="screenshot">
-							<div class="screenshot-placeholder">🎯</div>
-							<h3>Line Up Your Shot</h3>
-							<p>Drag to aim, factor in wind, watch the trajectory arc</p>
+							<img src="/screenshots/screenshot-6.png" alt="Game configuration menu" class="screenshot-img" />
+							<h3>Customize Your Battle</h3>
+							<p>Up to 8 players, mix humans and AI opponents</p>
 						</div>
 						<div class="screenshot">
-							<div class="screenshot-placeholder">💥</div>
-							<h3>Terrain Destruction</h3>
-							<p>Every explosion reshapes the battlefield</p>
+							<img src="/screenshots/screenshot-2.png" alt="Gameplay with wind indicator" class="screenshot-img" />
+							<h3>Factor In The Wind</h3>
+							<p>Calculate your trajectory and account for conditions</p>
 						</div>
 						<div class="screenshot">
-							<div class="screenshot-placeholder">🌐</div>
-							<h3>Play Anywhere</h3>
-							<p>Async multiplayer - take your turn whenever</p>
+							<img src="/screenshots/screenshot-3.png" alt="Projectile mid-flight" class="screenshot-img" />
+							<h3>Fire!</h3>
+							<p>Watch your shot arc across the battlefield</p>
 						</div>
 						<div class="screenshot">
-							<div class="screenshot-placeholder">☢️</div>
-							<h3>Arsenal of Chaos</h3>
-							<p>From baby nukes to cluster bombs</p>
+							<img src="/screenshots/screenshot-4.png" alt="Multi-tank battle" class="screenshot-img" />
+							<h3>Chaos Erupts</h3>
+							<p>Terrain destruction, smoke, and multiplayer mayhem</p>
 						</div>
 					</div>
 				</div>
